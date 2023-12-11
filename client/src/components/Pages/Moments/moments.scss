@@ -1,0 +1,24 @@
+// @import "../../../style.scss";
+
+// .moments{
+//     @include themify($themes){
+//         background-color: themed("bgSoft");
+//         padding: 20px 70px;
+
+
+.moments,.imageList{
+            background-color: themed("bgSoft");
+            
+
+            &::-webkit-scrollbar{
+                display: none;
+            }
+        }
+
+//     }
+// }
+// @media (max-width: 480px) {
+//     .imageList{
+        
+//     }
+// }

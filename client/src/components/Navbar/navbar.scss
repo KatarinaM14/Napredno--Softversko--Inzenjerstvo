@@ -1,0 +1,122 @@
+@import "../../style.scss";
+
+.navbar{
+    @include themify($themes){
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        height: 50px;
+        border-bottom: 1px solid themed("border");
+        position: sticky;
+        top: 0;
+        background-color: themed("bg");
+        color: themed("textColor");
+        z-index: 999;
+        .leftNavbar{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px;
+            span{
+                font-weight: bold;
+                font-size: 20px;
+                color: themed("logo");
+            }
+            .search{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border: 1px solid themed("border");
+                border-radius: 5px;
+                padding: 5px;
+                input{
+                    border: none;
+                    width: 500px;
+                    background-color: transparent;
+                    color: themed("textColor");
+
+                    @include mobile{
+                        display: none;
+                      }
+            
+                      @include tablet{
+                        width: 200px;
+                      }
+                }
+            }
+        }
+        .rightNavbar{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+
+            @include mobile{
+                display: none;
+              }
+            .user{
+                display: flex;
+                
+                align-items: center;
+                gap: 10px;
+                font-weight: 500;
+
+                @include tablet{
+                    display: none;
+                  }
+                img{
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                span{
+    
+                }
+            }
+            .notifications {
+                position: absolute;
+                top: 50px;
+                right: 0;
+                background-color: white;
+                color: black;
+                font-weight: 300;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+              }
+              .nButton {
+                width: 80%;
+                padding: 5px;
+                margin-top: 10px;
+              }
+              .iconImg {
+                width: 20px;
+                height: 20px;
+              }
+        }
+    }
+   
+}
+.imgProile{
+    
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.appbarr{
+    @include themify($themes){
+        border-bottom: 1px solid themed("border");
+        background-color: "#7C567F";
+        color: themed("textColor");
+        height: 70px;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
+}
+.notificationsMobile{
+    
+}
