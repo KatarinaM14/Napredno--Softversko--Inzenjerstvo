@@ -1,6 +1,5 @@
 import React,{ useState ,  useEffect } from "react";
 import "./leftbar.scss";
-import Emoji from "../../assets/Emoji.jpeg";
 import iconforaddstory from "../../assets/iconforaddstory.png";
 import momentsicon1 from "../../assets/momentsicon.jpg";
 import addposticon from "../../assets/addposticon.png";
@@ -23,16 +22,8 @@ const Leftbar = ({connection, mobileSize}) => {
     console.log(mobileSize)
 
     const handleClick = (user) => {
-   
-        // if(user?.user._id == donationData?.creatorId)
-        // {
-        //    navigate("/userpage");
-        // }
-        // else{
         console.log(user)
         navigate("/profile", {state: {u : user}});
-        //}
-       
     }
 
     return(
@@ -43,14 +34,6 @@ const Leftbar = ({connection, mobileSize}) => {
                     <img src={currentUser?.profileImg} alt=""/>
                     <span>{currentUser?.firstName} {currentUser?.lastName}</span>
                     </div>
-                    {/* <div className="item">
-                        <img className="imgLeftBar" src={Emoji} alt=""/>
-                        <span>Friends</span>
-                    </div>
-                    <div className="item">
-                        <img className="imgLeftBar" src={Emoji} alt=""/>
-                        <span>Groups</span>
-                    </div> */}
                     <Link to="/addStory"  style={{textDecoration:"none", color:"inherit"}}>
                         <div className={ mobileSize ? "mobileItem" : "item"}>
                             <img className="imgLeftBar" src={iconforaddstory} alt=""/>

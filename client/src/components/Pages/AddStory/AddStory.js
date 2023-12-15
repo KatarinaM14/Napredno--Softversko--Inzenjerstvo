@@ -34,23 +34,17 @@ const AddStory = () => {
         setNewStory({description: "", image: '', location: ''});
       }
 
-      
       const handleSubmit=async (e) =>{
         e.preventDefault();
         dispatch(createStory(newStory));
-        clear();
-        
+        clear();  
       }
 
     return(
-        // <React.Fragment>
-        // <CssBaseline />
-        // <Container maxWidth="sm" direction="column">
           <Box className="BoxAddStory" sx={{display:"flex",  height: '100vh', width:"100vw" ,justifyContent:"center", alignSelf:"center"}}>
            <Grid container className='addStoryMainGdrid'  sx={{display:"flex", height: '100%', width: '40%', alignItems: "center"}} xs={9} sm={5}>
               <Grid container className='addStoryForm' direction={"column"} height={"500px"} justifyContent={"space-around"} sx={{display:"flex", backgroundColor:"#3A739E" }}>
                   <Grid  sx={{display:"flex", justifyContent:"center"  }} >
-                  {/* <Item >Add story</Item> */}
                     <div className='addStoryHeader'>
                       Add story
                     </div>
@@ -62,26 +56,19 @@ const AddStory = () => {
                   <Item >
                   <TextField id="outlined-basic" label="Location" fullWidth variant="outlined" onChange={(e)=>setNewStory({...newStory,location:e.target.value})}/>
                   </Item>
-                  {/* <Item item> */}
                   <div style={{alignSelf:"center"}}>
-                  {/* <TextField id="outlined-basic" label="Image" fullWidth variant="outlined" onChange={(e)=>setNewPost({...newPost,image:e.target.value})}/> */}
                     <FileBase type="file" multiple={false} onDone={({base64})=>setNewStory({...newStory,image:base64})}/>
-                  {/* </Item> */}
                   </div>
                   </Grid>
                   <Grid item sx={{display: "flex", justifyContent:"center"}}>
-                  {/* <Item> */}
                   <Button  className='addStorySaveButton' style={{color:"#3A739E", backgroundColor:"white"}}  startIcon={<SaveIcon style={{color:"#3A739E"}}/>} onClick={handleSubmit}>
                       Save
                   </Button>
-                  {/* </Item> */}
                   </Grid>
               </Grid>
 
            </Grid>
           </Box>
-      //   </Container>
-      // </React.Fragment>
     );
 }
 

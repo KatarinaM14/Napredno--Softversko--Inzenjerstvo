@@ -1,5 +1,4 @@
 import { REGISTER_USER_IN_CHAT, FETCH_USERS_BY_ID,USERS_CONVERSATIONS,ALL_MESSAGES_IN_CONVERSATION, SEND_MESSAGE,CREATE_CONVERSATION } from "../constants/actionTypes";
-//import { FETCH_MESSAGES_FROM_CONVERSATION, NEW_MESSAGE } from "../constants/actionTypes";
 
 const defaultMessages = [];
 export default (state = { chatMessages: [], conversations: [], userConversations:[], newMessage: {} }, action) => {

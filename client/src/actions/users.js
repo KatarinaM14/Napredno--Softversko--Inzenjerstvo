@@ -87,8 +87,6 @@ export const getUsersById = (usersIds) => async (dispatch) => {
 
     const res = dispatch({ type: FETCH_USERS_BY_ID, payload:  data  });
 
-   
-
     dispatch({ type: END_LOADING_USERS });
 
   } catch (error) {
@@ -113,11 +111,7 @@ export const getUsers = () => async (dispatch) => {
     dispatch({ type: START_LOADING_USERS });
     const { data } = await api.fetchUsers();
 
-   
-
-    const res = dispatch({ type: GET_ALL_USERS, payload:  data  });
-
-   
+    const res = dispatch({ type: GET_ALL_USERS, payload:  data  }); 
 
     dispatch({ type: END_LOADING_USERS });
 

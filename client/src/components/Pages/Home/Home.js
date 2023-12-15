@@ -13,19 +13,15 @@ const Home=({connection}) => {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        //dispatch(getPosts());
-    
         const user1 = localStorage.getItem("profile")
         console.log(user1)
     
       },[dispatch]);
-   //// const classes = useStyles();
+ 
     return (
-        // <div className='contact'>
         <div className='home'>
             <div className="main">
                 <div className="overlay"></div>
-            {/* <video src={videoGive} autoPlay loop muted/> */}
             <div className="content">
               <Stories/>
               <Posts connection={connection}/>

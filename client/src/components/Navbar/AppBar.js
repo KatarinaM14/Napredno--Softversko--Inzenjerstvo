@@ -113,14 +113,10 @@ const AppBarr = ({connection}) => {
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
   const { toogle, darkMode } = useContext(DarkModeContext);
-  //const {user, token} = useSelector(state => state.authData);
-  //console.log(user)
-  //console.log(token)
   const {authData, userCurrent} = useSelector(state=>state.auth);
   console.log(authData)
 
   const current = authData?.find(u => u.id === currentUser?.user.id);
-  console.log(current)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -139,107 +135,16 @@ const AppBarr = ({connection}) => {
     navigate("/login");
     setUserLoggedOut(null);
     setAnchorEl(null);
-   //handleMobileMenuClose();
 }
-// useEffect(() => {
-//   const token = currentUser != null ? currentUser.token : null;
-
-//   if (token) {
-//     const decodedToken = decode(token);
-
-//     if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-//   }
-// }, [location]);
-
-  useEffect(() => {
-      connection?.on('ReceiveNotificationPostLiked', (senderId, receiverId, postId, username) =>{
-        console.log('ReceiveNotificationPostLiked CALLED')
-        console.log(senderId)
-        console.log(receiverId)
-        console.log(postId)
-        console.log(connection)
-
-        setNotifications((prev)=>[...prev, {senderId: senderId,
-          receiverId: receiverId,
-      postId: postId,
-      username: username,
-      type: "liked"}])
-      })
-  },[connection]);
-  console.log(notifications)
-
-  useEffect(() => {
-      connection?.on('ReceiveNotificationPostCommented', (senderId, receiverId, postId, username) =>{
-        console.log('ReceiveNotificationPostCommented CALLED')
-        console.log(senderId)
-        console.log(receiverId)
-        console.log(postId)
-        console.log(connection)
-
-        setNotifications((prev)=>[...prev, {senderId: senderId,
-          receiverId: receiverId,
-      postId: postId,
-      username: username,
-      type: "commented"}])
-      })
-  },[connection]);
-  console.log(notifications)
-
-  useEffect(() => {
-      connection?.on('ReceiveNotificationFollow', (senderId, receiverId, username) =>{
-        console.log('ReceiveNotificationFollow CALLED')
-        console.log(senderId)
-        console.log(receiverId)
-        console.log(connection)
-
-        setNotifications((prev)=>[...prev, {senderId: senderId,
-          receiverId: receiverId,
-      username: username,
-      type: "followed"}])
-      })
-  },[connection]);
-  console.log(notifications)
-
-  //const { darkMode } = useContext(DarkModeContext);
-  const handleClick = () => {
  
-      // if(user?.user._id == donationData?.creatorId)
-      // {
-      //    navigate("/userpage");
-      // }
-      // else{
-        navigate("/profile", {state: {u : currentUser?.user}});
-      //}
-     
+  const handleClick = () => {
+      navigate("/profile", {state: {u : currentUser?.user}});
     }
-
-    const displayNotification = (n) => {
-      // let action;
-  
-      // if (type === 1) {
-      //   action = "liked";
-      // } else if (type === 2) {
-      //   action = "commented";
-      // } else {
-      //   action = "shared";
-      // }
-      if (n.type === "followed")
-      {
-          return (
-              <span className="notification">{`${n.username} started following you.`}</span>
-            );
-      }
-      return (
-        <span className="notification">{`${n.username} ${n.type} your post.`}</span>
-      );
-    };
 
     const handleRead = () => {
       setNotifications([]);
       setOpen(false);
     };
-
-
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -267,7 +172,6 @@ const AppBarr = ({connection}) => {
     setMobileMoreAnchorElOnlineFriends(null);
   };
   
-
   const handleMenuCloseOnlineFriends = () => {
     setAnchorEl(null);
     handleMobileMenuCloseOnlineFriends();
@@ -276,8 +180,6 @@ const AppBarr = ({connection}) => {
   const handleMobileMenuOpenOnlineFriends = (event) => {
     setMobileMoreAnchorElOnlineFriends(event.currentTarget);
   };
-
-
   
   const handleProfileMenuOpenAdd = (event) => {
     setAnchorElAdd(event.currentTarget);
@@ -325,7 +227,6 @@ const AppBarr = ({connection}) => {
         >
           <Avatar  src={current?.profileImg}/>
         </IconButton>
-            {/* <img src={current?.profileImg} alt=""/> */}
             <span>{current?.firstName} {current?.lastName}</span>
       </MenuItem>
       <MenuItem onClick={logout}>
@@ -386,8 +287,7 @@ const AppBarr = ({connection}) => {
       <MenuItem >
         <IconButton size="large"  color="black">
           <Badge color="error">
-            {darkMode ? <WbSunnyOutlinedIcon style={{marginTop:"2px", color:"#7C567F"}} onClick={toogle}/> : <DarkModeOutlinedIcon style={{marginTop:"2px", color:"#7C567F"}} onClick={toogle}/>}
-           
+            {darkMode ? <WbSunnyOutlinedIcon style={{marginTop:"2px", color:"#7C567F"}} onClick={toogle}/> : <DarkModeOutlinedIcon style={{marginTop:"2px", color:"#7C567F"}} onClick={toogle}/>} 
           </Badge>
         </IconButton>
         <p style={{ color:"#7C567F"}}>Mode</p>
@@ -403,38 +303,6 @@ const AppBarr = ({connection}) => {
         </IconButton>
         <p style={{ color:"#7C567F"}}>Messages</p>
       </MenuItem>
-      <MenuItem >
-        <IconButton
-          size="large"
-          color="black"
-          onClick={() => setOpen(!open)}
-        >
-          <Badge badgeContent={notifications.length} color="error">
-            <NotificationsIcon style={{ color:"#7C567F"}} />
-            {/* { notifications.length >0 &&
-                        <div className="counter">{notifications.length}</div>} */}
-          </Badge>
-        </IconButton>
-        <p style={{ color:"#7C567F"}}>Notifications</p>
-      </MenuItem>
-      {open && (
-                    <div className="notificationsMobile">
-                    {/* {notifications.map((n) => displayNotification(n))} */}
-                    <Dialog onClose={handleClose} open={open}>
-                    <DialogTitle>Notifications</DialogTitle>
-                    <List sx={{ pt: 0 }}>
-                      {notifications.map((n) => (
-                        <ListItem disableGutters key={n}>
-                         { displayNotification(n)}
-                        </ListItem>
-                      ))}
-                        <Button variant="contained" style={{display:"flex",alignSelf:"center", backgroundColor:"#7C567F"}} className="nButton" onClick={handleRead}>
-                          Mark as read
-                        </Button>
-                    </List>
-                  </Dialog>
-                    </div>
-                )}
       <MenuItem onClick={handleClick} >
         <IconButton
           size="large"
@@ -445,7 +313,6 @@ const AppBarr = ({connection}) => {
         >
           <Avatar  src={current?.profileImg}/>
         </IconButton>
-            {/* <img src={current?.profileImg} alt=""/> */}
             <span style={{color: "#7C567F"}}>{current?.firstName} {current?.lastName}</span>
       </MenuItem>
       <MenuItem onClick={logout}>
@@ -527,59 +394,16 @@ const AppBarr = ({connection}) => {
             <HomeOutlinedIcon style={{marginTop:"2px", color:"white", marginTop:"5px"}}/>
             </Link>
             {darkMode ? <WbSunnyOutlinedIcon style={{marginTop:"2px", marginTop:"5px"}} onClick={toogle}/> : <DarkModeOutlinedIcon style={{marginTop:"2px", marginTop:"5px"}} onClick={toogle}/>}
-           
-            
-          {/* <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search> */}
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <Link to="/chat" style={{textDecoration:"none"}}>
             <IconButton size="large" color="white">
-              <Badge  color="error">
-                {/* <MailIcon /> */}
-                
+              <Badge  color="error">   
                  <ChatIcon style={{color:"white", marginTop:"10px"}} />
               </Badge>
             </IconButton>
                 </Link>
-            <IconButton
-              size="large"
-              color="white"
-              onClick={() => setOpen(!open)}
-            >
-              <Badge badgeContent={notifications.length} color="error">
-                <NotificationsIcon style={{color:"white", marginTop:"3px"}}/>
-                {/* { notifications.length >0 &&
-                        <div className="counter">{notifications.length}</div>} */}
-              </Badge>
-            </IconButton>
-            {open && (
-                     <div className="notifications" >
-                     {/* {notifications.map((n) => displayNotification(n))} */}
-                     <Dialog onClose={handleClose} open={open}  >
-                     <DialogTitle style={{display:"flex",alignSelf:"center"}}>Notifications</DialogTitle>
-                     <List sx={{ pt: 0 }}>
-                      
-                       {notifications.map((n) => (
-                         <ListItem disableGutters key={n}>
-                          { displayNotification(n)}
-                         </ListItem>
-                       ))}
-                     </List>
-                         <Button  style={{display:"flex",alignSelf:"center", backgroundColor:"#7C567F"}} className="nButton" onClick={handleRead}>
-                           Mark as read
-                         </Button>
-                   </Dialog>
-                     </div>
-                )}
             <IconButton
               size="large"
               edge="end"
@@ -588,7 +412,6 @@ const AppBarr = ({connection}) => {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="white"
-            //   onClick={handleClick}
             >
               <Avatar src={current?.profileImg} />
             </IconButton>

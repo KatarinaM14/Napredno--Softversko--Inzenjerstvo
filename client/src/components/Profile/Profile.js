@@ -1,5 +1,4 @@
 import React,{ useState ,  useEffect } from "react";
-//import "./rightbar.scss";
 import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -39,34 +38,24 @@ import ListItemText from '@mui/material/ListItemText';
 import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import UserList from "./UserList/UserList.js";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import { createConversation } from "../../actions/chat";
 
 const Profile = ({connection}) => {
     const current = JSON.parse(localStorage.getItem("profile"));
-    console.log(JSON.parse(localStorage.getItem("profile")).user)
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
     const {posts} = useSelector(state=>state.posts);
     const {authData, userCurrent, allUsers} = useSelector(state=>state.auth);
-    //const [currentUser, setCurrentUser] = useState(authData.find(u => u.id === current.id));
-
 
     const currentUser = authData?.find(u => u.id === current?.user.id);
-    console.log(current)
-    console.log(connection)
-    // useEffect(()=>{
-      
-      // },[authData]);
+  
       useEffect(()=>{
-        console.log("all users")
         dispatch(getUsers());
       },[]);
       
-      console.log(allUsers)
     const [userData, setUserData] = useState({
         id: currentUser?.id,
         firstName: currentUser?.firstName,
@@ -88,37 +77,19 @@ const Profile = ({connection}) => {
         webSites: currentUser?.webSites,
       });
       const [open, setOpen] = React.useState(false);
-      //const [openMessanger, setOpenMessanger] = React.useState([currentUser]);
       const user = location.state?.u;
-      console.log(user)
-      console.log(authData)
-      console.log(currentUser)
       const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClickOpenMessanger = () => {
-
       const members = [currentUser, user]
-      console.log(members)
-      console.log("OPEENNN MESSANGERRR")
-      console.log(currentUser)
-      console.log(user)
-      //setOpenMessanger([...openMessanger, currentUser] );
-     // console.log(openMessanger)
-      //setOpenMessanger(...openMessanger, user );
-
-      //console.log(openMessanger)
       dispatch(createConversation(members, navigate));
-
       navigate("/chat");
   };
 
- // console.log(openMessanger)
-
     const [openAllUsers, setOpenAllUsers] = useState(false);
     
-
     const handleClickOpenAllUsers = () => {
       setOpenAllUsers(true);
   };
@@ -146,97 +117,38 @@ const Profile = ({connection}) => {
 
     useEffect(()=>{
         if(currentUser?.id === user?.id){
-            console.log("Current")
             dispatch(getUser(currentUser?.id));
             dispatch(getPosts(currentUser?.id));
-
-            //items.find(item => item.id === itemIdToFind)
-            //setCurrentUser(authData.find(u => u.id === currentUser.id))
-            console.log(currentUser)
-            //dispatch(getFollowers(currentUser?.id));
-            //dispatch(getFollowing(currentUser?.id));
         }else{
-            console.log("NOT Current")
             dispatch(getUser(user?.id));
             dispatch(getPosts(user?.id));
             dispatch(getFollowers(user?.id));
             dispatch(getFollowing(user?.id));
-
-            // setUserFollowed(currentUser?.user.following.some(
-            //     u => u.id === user.id
-            // ));
-            // console.log(isUserFollowed)
         }
-
-        // if(authData){
-        //     authData.forEach(element => {
-        //         if(element.id == currentUser.user.id){
-        //             setUserFollowed(element.following.some(
-        //                 u => u.id === user.id
-        //             ));
-        //         }
-        //     });
-        // }
     },[currentUser]);
-
-
-    console.log(posts)
-    console.log(authData)
-    console.log(userCurrent)
-    console.log(currentUser)
-    
 
     const addProfilePhoto = async (base64, e) => {
      
         setUserData({...userData, profileImg: base64});
-        console.log(userData);
+       
         dispatch(addProfilePhoto(currentUser))
         
       };
-    //   const isUserFollowed = currentUser?.user.following.some(
-    //     u => u.id === user.id
-    // );
-
 
     const follow = async (userId, e) => {
         e.preventDefault();
-  
-        console.log(userId)
         dispatch(followUser(currentUser, userId));
 
-        setUserFollowed(!isUserFollowed);
-        // setUserFollowed(currentUser?.user.following.some(
-        //     u => u.id === user.id
-        // ));
-         console.log(isUserFollowed)
-         console.log(current?.user?.id)
-         console.log(userId)
-         console.log(current?.user?.username)
-
-         await connection?.invoke("SendNotificationFollow", 
-         current.user.id, userId, current.user.username)
-         .catch(console.error());
+        setUserFollowed(!isUserFollowed); 
         
       };
     const unfollow = (userId, e) => {
         e.preventDefault();
   
-        console.log(userId)
         dispatch(unfollowUser(currentUser, userId));
-        
-        console.log(currentUser?.following)
 
         setUserFollowed(!isUserFollowed);
-        // setUserFollowed(currentUser?.user.following.some(
-        //     u => u.id === user.id
-        // ));
-         console.log(isUserFollowed)
       };
-    
-     
-
-    console.log(isUserFollowed)
-
 
     const [openFollowers, setOpenFollowers] = React.useState(false);
     const [scrollFollowers, setScrollFollowers] = React.useState('body');
@@ -284,7 +196,6 @@ const Profile = ({connection}) => {
     }, [open]);
 
     const handleListItemClick = (value) => {
-        // onClose(value);
         setOpenFollowing(false);
         setOpenFollowers(false);
         navigate("/profile", {state: {u : value}});
@@ -314,10 +225,6 @@ const Profile = ({connection}) => {
                     (
                     <IconButton color="primary" aria-label="upload picture" component="span">
                         <AccountCircleIcon />
-                        {/* <div className='container mr-60'>
-                        <FileBase type="file" multiple={false} onDone={({base64})=> addProfilePhoto(base64)}/>
-                   
-                        </div>  */}
                     </IconButton>
                     ))
                 }
@@ -342,18 +249,13 @@ const Profile = ({connection}) => {
                               <Grid   elevation={6} style={{display: "flex", flexDirection:"row", height:"70px"}} >
                                 <div style={{display: "flex", flexDirection:"row",width:"100%", alignContent:"space-between"}}>
                               <Grid direction="row" container  style={{backgroundColor: 'white', gap:"10px"}}>
-
                                 <Avatar  src={user.profileImg} />
-                                <Typography xs={{fontSize:"5px"}}  style={{marginTop:"10px"}} >{user.firstName+ " "+ user.lastName}</Typography>
-                                
+                                <Typography xs={{fontSize:"5px"}}  style={{marginTop:"10px"}} >{user.firstName+ " "+ user.lastName}</Typography>        
                                 </Grid>
                                 <Grid  container  style={{backgroundColor: 'white', width:"20%"}}>
-                                {/* <Grid > */}
                                     <Button  size="small" style={{backgroundColor: '#975F9B', color: 'white',width:"100%", height:"50%"}} onClick={() => dispatch(deleteUser(user.id))}>
-                                      {/* <Delete fontSize="small" /> &nbsp; Obrisi */}
                                     Delete
                                     </Button>
-                                {/* </Grid> */}
                                 </Grid>
                                 </div>
                               </Grid>
@@ -362,46 +264,25 @@ const Profile = ({connection}) => {
                     ))}
                </Grid>
                </DialogContent>
-               {/* <DialogActions  style={{ backgroundColor: 'white'}}>
-               <Button style={{ backgroundColor: '#975F9B', color:"white"}}  onClick={handleClose}>
-                  Cancel
-               </Button>
-               <Button style={{ backgroundColor: '#975F9B', color:"white"}} onClick={handleSubmit}>
-                  Save changes
-               </Button> 
-               </DialogActions> */}
            </Dialog>
                         {(currentUser)&&(currentUser?.id === user?.id)&&
                         (currentUser.webSites && (currentUser.webSites.map(site=>(
                             (site.includes("facebook")) && (<a href={site}>
                             <FacebookTwoToneIcon fontSize="large" />
                             </a>)
-
                             (site.includes("instagram")) && (<a href={site}>
                                 <InstagramIcon fontSize="large" />
                                 </a>))
-                            
                         )))}
                         {(user)&&(currentUser?.id !== user?.id)&&
                              (user.webSites && (user.webSites.map(site=>(
                                 (site.includes("facebook")) && (<a href={site}>
                                 <FacebookTwoToneIcon fontSize="large" />
                                 </a>)
-    
                                 (site.includes("instagram")) && (<a href={site}>
                                     <InstagramIcon fontSize="large" />
                                     </a>)))))
                         }
-{/*                         
-                        <a href="http://facebook.com">
-                        <TwitterIcon fontSize="large" />
-                        </a>
-                        <a href="http://facebook.com">
-                        <LinkedInIcon fontSize="large" />
-                        </a>
-                        <a href="http://facebook.com">
-                        <PinterestIcon fontSize="large" />
-                        </a> */}
                     </div>
                     <div className="centerProfileInfo">
                         {(currentUser)&&(currentUser?.id === user?.id)&&(<span>{currentUser?.firstName} {currentUser?.lastName}</span>)}
@@ -413,12 +294,10 @@ const Profile = ({connection}) => {
                             {(user)&&(currentUser?.id !== user?.id)&&(<span>{user.city}</span>)}
                         </div>
                         <div className="item">
-                            {/* <LanguageIcon /> */}
                             {(currentUser)&&(currentUser?.id === user?.id)&&(<span>{currentUser?.biography}</span>)}
                             {(user)&&(currentUser?.id !== user?.id)&&(<span>{user.biography}</span>)}
                         </div>
                         </div>
-                        {/* <button>follow</button> */}
                         {(currentUser)&&(currentUser?.id !== user?.id)&&
                         (!isUserFollowed)&&(
                             <Button style={{ backgroundColor:'#975F9B'}} onClick={(e)=>follow(user.id,e)}>
@@ -447,18 +326,14 @@ const Profile = ({connection}) => {
                             (<Button onClick={handleClickOpenMessanger}>
                                 <EmailOutlinedIcon style={{ color: '#975F9B'}}/>
                             </Button>)}
-                        {/* <MoreVertIcon /> */}
                         {(currentUser)&&(currentUser?.id === user?.id)&&
                             (<Button onClick={handleClickOpen}>
                                 <AddIcon />
                             </Button>)}
-               
                          <Dialog  sx={{display:"flex" , justifyContent:"center", alignSelf:"center", height:"100%"}}   open={open} onClose={handleClose} >
                          <DialogTitle  style={{ backgroundColor: 'white', color:'#975F9B', alignSelf:"center"}} id="form-dialog-title">Change profile</DialogTitle>
                          <DialogContent style={{display:"flex" , maxHeight:"800px", backgroundColor: 'white', height:"100%"}}>
                          <Grid container style={{ display: 'flex', height:"500px", marginTop:"5px"}} >
-                         
-                       
                          <Grid container >
                          <TextField
                              name="firstName"
@@ -530,15 +405,6 @@ const Profile = ({connection}) => {
                          />
                          </Grid>
                          <Grid container >
-                         {/* <TextField
-                         
-                             name="profileImg"
-                             variant="outlined"
-                             label="Image"
-                             value={userData.profileImg}
-                             fullWidth
-                             onChange={(e) => setUserData({ ...userData, profileImg: e.target.value })}
-                         /> */}
                          <FileBase type="file" multiple={false} onDone={({base64})=>setUserData({...userData,profileImg:base64})}/>
                          </Grid>
                          </Grid>
@@ -593,27 +459,9 @@ const Profile = ({connection}) => {
             </ListItemButton>
           </ListItem>
         )))}
-        {/* <ListItem disableGutters>
-          <ListItemButton
-            autoFocus
-            onClick={() => handleListItemClick('addAccount')}
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add account" />
-          </ListItemButton>
-        </ListItem> */}
-      </List>
-                        
+      </List>  
                         </DialogContentText>
                         </DialogContent>
-                        {/* <DialogActions>
-                        <Button onClick={handleClickOpenFollowers}>Cancel</Button>
-                        <Button onClick={handleClickOpenFollowers}>Subscribe</Button>
-                        </DialogActions> */}
                     </Dialog>
                         <Dialog
                             open={openFollowing}
@@ -629,11 +477,6 @@ const Profile = ({connection}) => {
                                 ref={descriptionElementRefFollowing}
                                 tabIndex={-1}
                             >
-                              {/* {(currentUser)&&(currentUser?.id === user?.id)&&
-                              (currentUser?.following.map(f=>{
-                                
-                              }))} */}
-
 <List sx={{ pt: 0 }}>
         {(currentUser)&&(currentUser?.id === user?.id)&&
                               (currentUser?.following?.map((f) => (
@@ -661,27 +504,9 @@ const Profile = ({connection}) => {
             </ListItemButton>
           </ListItem>
         )))}
-        {/* <ListItem disableGutters>
-          <ListItemButton
-            autoFocus
-            onClick={() => handleListItemClick('addAccount')}
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add account" />
-          </ListItemButton>
-        </ListItem> */}
       </List>
-
                             </DialogContentText>
                             </DialogContent>
-                            {/* <DialogActions>
-                            <Button onClick={handleCloseFollowing}>Cancel</Button>
-                            <Button onClick={handleCloseFollowing}>Subscribe</Button>
-                            </DialogActions> */}
                         </Dialog>
                     </div>
                 </div>

@@ -10,9 +10,7 @@ export default (state = { isLoading: true, stories: [], story: {} }, action) => 
     case FETCH_ALL_STORIES:
         return {
                       ...state,
-                      stories: action.payload.data,
-                    //   currentPage: action.payload.currentPage,
-                    //   numberOfPages: action.payload.numberOfPages,
+                      stories: action.payload.data
                     };
     case FETCH_FOLLOWINGS_STORIES:
       console.log(state.stories)
@@ -25,21 +23,11 @@ export default (state = { isLoading: true, stories: [], story: {} }, action) => 
     case CREATE_STORY:
         console.log(action)
         console.log(action.payload)
-        return { ...state, story:  action.payload };
-        //return { ...state, stories: [...state.stories, action.payload] };
+        return { ...state, story:  action.payload }; 
     case LATEST_STORY:
         console.log(action)
         console.log(action.payload)
         return { ...state, story:  action.payload };
-    // case LIKE_STORY:
-    //     console.log(action)
-    //     console.log(state.stories)
-    //     return { ...state, stories: state.stories.map((story) => (story.id === action.payload.postId ? { ...post, likes: [...post.likes, action.payload.user] } : post)) };
-    // case DISLIKE_POST:
-    //     console.log(action)
-    //     console.log(state.posts)
-    //     return { ...state, posts: state.posts.map((post) => (post.id === action.payload.postId ? { ...post, likes: post.likes.filter((user) => user.id !== action.payload.user.id) } : post)) };
-   
     default:
         return state;
    }

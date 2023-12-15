@@ -48,7 +48,6 @@ export default(state = { isLoading: true, authData: [], userCurrent: [], usersTo
         {
           console.log(action.payload)    
           return { ...state, authData: state.authData.map((user) => (user.id === action.payload.userId ? {...user, following: user.following.filter((u)=> u.id !== action.payload.unfollowedUser.id)} : user)) };
-          //return { ...state, authData: state.authData.filter((user) => user._id !== action.payload) };
         }
         case FETCH_ONE_USER:
           {    

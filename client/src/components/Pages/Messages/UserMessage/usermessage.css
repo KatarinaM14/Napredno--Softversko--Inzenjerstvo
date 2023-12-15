@@ -9,7 +9,6 @@
 
     border-radius: 0.45rem;
     margin: 0rem 1rem;
-
 }
 
 .userMessage.mineMessage {
@@ -25,7 +24,6 @@
     background-color: #7f688c;
     border-radius: 25px 25px 25px 25px / 30px 30px 30px 30px;
     color: white;
-
 }
 
 .userMessage.userMessage.friendMessage > .messageText {
@@ -38,10 +36,7 @@
     border-radius: 0.45rem;
     display: flex;
     flex-wrap: wrap;
-    /* flex-wrap: wrap; */
     max-width: 100%;
-    /* min-width: 7%; */
-
     word-break: break-all; 
 }
 

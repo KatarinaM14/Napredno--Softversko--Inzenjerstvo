@@ -9,17 +9,12 @@ import { getOneUser } from '../../../../actions/auth.js';
 import { allMessages } from '../../../../actions/chat.js';
 import { useSelector, useDispatch } from 'react-redux';
 import * as api from '../../../../api/index.js';
-//import { getConversation } from '../../../../actions/conversations.js';
-
 
 export default function Conversation({conversation, currentUser,mode}) {
 
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const [active, setActive] = useState(false);
-  //const {isLoading, usersConversations, current} = useSelector(state => state.usersConversations);
-
-  console.log(currentUser)
   
   useEffect(() => {
     console.log(conversation)
@@ -47,10 +42,6 @@ export default function Conversation({conversation, currentUser,mode}) {
 
   const setActiveConv = () => {
     console.log("set active")
-    //const friendId = conversation.members.find((m) => m !== userId);
-    // dispatch(getOneUser(friendId));
-    // dispatch(allMessages(conversation._id));
-    // dispatch(getConversation(conversation._id));
   };
 
   return (

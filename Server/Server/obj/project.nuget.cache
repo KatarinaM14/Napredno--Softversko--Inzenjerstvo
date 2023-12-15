@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MDc0MkGk4P9VFsgb3q0ZkQDVzNc1RrVBk/JU0OtWWfI/aacKSE/a2JJaiROICPGyc5nFntOZy1SiNnJsrXWySw==",
+  "dgSpecHash": "XTTm+2Bgn0c5Mt8JMadBkXX1QqIbltRW5JDguBkvL6ySemcYR+r99iwP9EEUcPJcd+LO0rMSqH5H9Gd/sW/OkA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\katar\\OneDrive\\Desktop\\NAPREDNO SWE\\Server\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\katar\\OneDrive\\Desktop\\NAPREDNO SWE\\Frontend\\Server\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\katar\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\katar\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.0\\microsoft.aspnetcore.authentication.jwtbearer.3.1.0.nupkg.sha512",

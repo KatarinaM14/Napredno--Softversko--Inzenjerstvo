@@ -67,34 +67,9 @@
 }
 }
  .mobileLeftBar{
-     //@include themify($themes){
-
-        
-       
-        
-       
-        
-        // height:100%;
-        // overflow: scroll;
-        // width: 100%;
-        //background-color: themed("bg");
-        //color: themed("textColor");
-    
-        
-    
-        // &::-webkit-scrollbar{
-        //     display: none;
-        // }
-        // .mobileContainer{
-    
+     
             padding: 10px;
     
-        //     hr{
-        //         margin: 5px 0px;
-        //         border: none;
-        //         height: 0.1px;
-        //         background-color: themed("border");
-        //     }
             .mobileMenu{
                 display: flex;
                 flex-direction: column;
@@ -127,9 +102,5 @@
                         
                     }
                  }
-    
              }
-    
-    
-     //    }
  }

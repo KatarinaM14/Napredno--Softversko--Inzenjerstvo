@@ -14,12 +14,9 @@ const Rightbar = ({connection, mobileSize}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-
     useEffect(()=>{
         dispatch(getUsersForFollow(currentUser.user.id));
     },[]);
-
-    
 
     useEffect(() => {
         onlineFriends();
@@ -33,7 +30,6 @@ const Rightbar = ({connection, mobileSize}) => {
         console.log(currentUser.id)
         if(connection && connection._connectionState ==="Connected")
         {
-
             await connection?.invoke("DisplayOnlineUsers").catch(console.error());
         }
     }
@@ -47,38 +43,18 @@ const Rightbar = ({connection, mobileSize}) => {
       
     },[]);
 
-    console.log(onlineUsers)
-    console.log(conversations)
-
     const {usersToFollow} = useSelector(state=>state.auth);
-
-    console.log(usersToFollow);
-    console.log(connection)
-    //console.log(isLoading);
-    console.log(currentUser.user.id);
 
     const follow = async (userId, e) => {
         //e.preventDefault();
   
         console.log(userId)
         dispatch(followUser(currentUser.user, userId));
-        
-        await connection?.invoke("SendNotificationFollow", 
-            currentUser?.user?.id, userId, currentUser?.user?.username)
-            .catch(console.error());
       };
 
     const handleClick = (user) => {
    
-        // if(user?.user._id == donationData?.creatorId)
-        // {
-        //    navigate("/userpage");
-        // }
-        // else{
-        console.log(user)
-        navigate("/profile", {state: {u : user}});
-        //}
-       
+        navigate("/profile", {state: {u : user}});  
     }
 
     return(
@@ -93,57 +69,13 @@ const Rightbar = ({connection, mobileSize}) => {
                              <span>{user.firstName} {user.lastName}</span>
                          </div>
                          <div className={ mobileSize ? "mobileButtons" : "buttons"}>
-                             {/* <button onclick={(e) => follow(user.id)}>follow</button> */}
                              <Button style={{ backgroundColor: '#975F9B'}} onClick={()=>follow(user.id)}>
                                 follow
                             </Button> 
-                             {/* <button>unfollow</button> */}
-                             {/* <Button style={{ backgroundColor: '#5E11ff'}} onClick={()=>follow(user.id)}>
-                                unfollow
-                            </Button>  */}
                          </div>
                      </div>
                     ))}
                 </div>
-                {/* <div className="item">
-                    <span>Latest activities</span>
-                    <div className="user">
-                        <div className="userInfo">
-                            <img src={currentUser.user.profileImg} alt=""/>
-                            <p>
-                                <span>{currentUser.user.firstName} {currentUser.user.lastName}</span> changed their cover picture
-                            </p>
-                        </div>
-                       <span>1 min ago</span>
-                    </div>
-                    <div className="user">
-                        <div className="userInfo">
-                            <img src={currentUser.user.profileImg} alt=""/>
-                            <p>
-                                <span>{currentUser.user.firstName} {currentUser.user.lastName}</span> changed their cover picture
-                            </p>
-                        </div>
-                       <span>1 min ago</span>
-                    </div>
-                    <div className="user">
-                        <div className="userInfo">
-                            <img src={currentUser.user.profileImg} alt=""/>
-                            <p>
-                                <span>{currentUser.user.firstName} {currentUser.user.lastName}</span> changed their cover picture
-                            </p>
-                        </div>
-                       <span>1 min ago</span>
-                    </div>
-                    <div className="user">
-                        <div className="userInfo">
-                            <img src={currentUser.user.profileImg} alt=""/>
-                            <p>
-                                <span>{currentUser.user.firstName} {currentUser.user.lastName}</span> changed their cover picture
-                            </p>
-                        </div>
-                       <span>1 min ago</span>
-                    </div>
-                </div> */}
                 <div className={ mobileSize ? "mobileItem" : "item"}>
                     <span>Online friends</span>
                     {(conversations)&&conversations?.map((u)=>(
@@ -156,27 +88,6 @@ const Rightbar = ({connection, mobileSize}) => {
                                         </div>
                                     </div>)
                     ))}
-                    {/* <div className={ mobileSize ? "mobileUser" : "user"}>
-                        <div div className={ mobileSize ? "mobileUserInfo" : "userInfo"}>
-                            <img src={currentUser.user.profileImg} alt=""/>
-                            <div className={ mobileSize ? "mobileOnline" : "online"}/>
-                                <span>{currentUser.user.firstName} {currentUser.user.lastName}</span> 
-                        </div>
-                    </div>
-                    <div className={ mobileSize ? "mobileUser" : "user"}>
-                        <div div className={ mobileSize ? "mobileUserInfo" : "userInfo"}>
-                            <img src={currentUser.user.profileImg} alt=""/>
-                            <div className={ mobileSize ? "mobileOnline" : "online"}/>
-                                <span>{currentUser.user.firstName} {currentUser.user.lastName}</span> 
-                        </div>
-                    </div>
-                    <div className={ mobileSize ? "mobileUser" : "user"}>
-                        <div div className={ mobileSize ? "mobileUserInfo" : "userInfo"}>
-                            <img src={currentUser.user.profileImg} alt=""/>
-                            <div className={ mobileSize ? "mobileOnline" : "online"}/>
-                                <span>{currentUser.user.firstName} {currentUser.user.lastName}</span> 
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>

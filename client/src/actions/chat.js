@@ -4,8 +4,6 @@ import { REGISTER_USER_IN_CHAT,USERS_CONVERSATIONS,ALL_MESSAGES_IN_CONVERSATION,
 
 export const registerUser = (user) => async (dispatch) => {
     try{
-
-     
         const {data} = await api.registerUser(user);
 
         console.log(data)
@@ -48,7 +46,6 @@ export const getMessagesInConversations = (id, navigate) => async(dispatch) => {
   
         if(error.response?.status)
         {
-            //alert(error?.response?.data)
             navigate("/chat");
         }
     }
@@ -69,7 +66,6 @@ export const createMessage = (message, navigate) => async (dispatch) => {
   
         if(error.response?.status)
         {
-            //alert(error?.response?.data)
             navigate("/chat");
         }
         

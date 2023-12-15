@@ -31,10 +31,8 @@ export const signup = (formData, navigate) => async(dispatch) => {
     
         dispatch({ type: AUTH, data });
 
-        
-    
         navigate("/login");
-        ///router.push('/login');
+        
       } catch (error) {
         console.log(error);
         alert(error.response.data)

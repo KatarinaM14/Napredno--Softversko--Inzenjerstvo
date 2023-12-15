@@ -12,7 +12,6 @@ class SignalRService {
         //.withAutomaticReconnect()
         .build();
 
-        
         await this.connection.start()
         .catch(console.error());
         
@@ -25,16 +24,11 @@ class SignalRService {
         this.connection.on('UserConnected', () =>{
             console.log('the server has called here')
         })
-
     }
-    
     
     stopChatConnection(){
         this.connection.stop().catch(error => console.log(error));
     }
-    
-    // Implement methods for sending and receiving messages,
-    // connecting, disconnecting, etc.
 }
 
 const signalRService = new SignalRService();

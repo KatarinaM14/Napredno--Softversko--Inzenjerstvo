@@ -77,33 +77,7 @@ namespace Server.Hubs
 
             await Clients.Client(toConnectionId).SendAsync("NewPrivateMessage", message, senderId, receiverId);
         }
-        public async Task SendNotificationPostLiked( string senderId, string receiverId, string postId, string username)
-        {
-            string privateGroupName = GetPrivateGroupName(senderId, receiverId);
-            await Groups.AddToGroupAsync(Context.ConnectionId, privateGroupName);
-            var toConnectionId = _chatService.GetUserByConnectionIdByUser(receiverId);
-            await Groups.AddToGroupAsync(toConnectionId, privateGroupName);
-
-            await Clients.Client(toConnectionId).SendAsync("ReceiveNotificationPostLiked", senderId, receiverId, postId, username);
-        }
-        public async Task SendNotificationPostCommented(string senderId, string receiverId, string postId, string username)
-        {
-            string privateGroupName = GetPrivateGroupName(senderId, receiverId);
-            await Groups.AddToGroupAsync(Context.ConnectionId, privateGroupName);
-            var toConnectionId = _chatService.GetUserByConnectionIdByUser(receiverId);
-            await Groups.AddToGroupAsync(toConnectionId, privateGroupName);
-
-            await Clients.Client(toConnectionId).SendAsync("ReceiveNotificationPostCommented", senderId, receiverId, postId, username);
-        }
-        public async Task SendNotificationFollow(string senderId, string receiverId, string username)
-        {
-            string privateGroupName = GetPrivateGroupName(senderId, receiverId);
-            await Groups.AddToGroupAsync(Context.ConnectionId, privateGroupName);
-            var toConnectionId = _chatService.GetUserByConnectionIdByUser(receiverId);
-            await Groups.AddToGroupAsync(toConnectionId, privateGroupName);
-
-            await Clients.Client(toConnectionId).SendAsync("ReceiveNotificationFollow", senderId, receiverId, username);
-        }
+        
         public async Task DisplayOnlineUsers()
         {
             var onlineUsers = _chatService.GetOnlineUsers();

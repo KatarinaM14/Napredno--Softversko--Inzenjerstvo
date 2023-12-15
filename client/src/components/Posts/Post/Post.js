@@ -48,20 +48,9 @@ const Post = ({post, connection}) => {
 
     const changeColor = async () => {
         if(isActive == false && !isFound){
-            console.log("red")
            dispatch(likePost(post?.id, currentUser?.user));
-
-           console.log(currentUser?.user?.id)
-           console.log(post?.user.id)
-           console.log(post?.id)
-           console.log(connection)
-
-            await connection?.invoke("SendNotificationPostLiked", 
-            currentUser?.user?.id, post?.user?.id, post?.id, currentUser?.user?.username)
-            .catch(console.error());
            
         }else if(isActive == true && isFound){
-            console.log("grey")
             dispatch(dislikePost(post?.id, currentUser?.user));
         }
         setIsActive(!isActive);
@@ -78,28 +67,16 @@ const Post = ({post, connection}) => {
       const handleCloseUpdate = () => {
         setOpenUpdate(false);
       };
-      
 
     const handleClickDeletePost = () => {
         dispatch(deletePost(post, post?.user?.id))
         setOpenUpdate(false);
       };
 
-
-
       const handleClickUpdatePost = () => {
         dispatch(updatePost(post, newDescription));
         setOpenUpdate(false);
       };
-
-    console.log(post?.likes);
-    console.log(post?.likes?.length);
-
-    const liked = true;
-    console.log(post)
-    console.log(currentUser?.user?.id)
-    console.log(currentUser?.user?.role)
-    console.log(post?.user?.id)
     
     return (
         <div className="post">
@@ -108,9 +85,7 @@ const Post = ({post, connection}) => {
                 <div className="userInfo">
                     <img src={post?.user?.profileImg} alt=""/>
                     <div className="details" onClick={()=>handleClick(post?.user)}>
-                        {/* <Link to={'/profile/${posts.userId}'} style={{textDecoration:"none", color:"inherit"}}> */}
                             <span className="name">{post?.user?.firstName} {post?.user?.lastName}</span>
-                        {/* </Link> */}
                         <span className="date">{format(post?.createdAt)}</span>
                     </div>
                 </div>

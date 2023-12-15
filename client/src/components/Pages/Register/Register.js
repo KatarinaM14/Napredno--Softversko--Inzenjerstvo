@@ -1,11 +1,9 @@
-//import styles from "./stylesSingup.css";
+
 import { useState } from "react";
-//import  config  from '../../../config';
 import {Link, useNavigate} from 'react-router-dom';
 import { signup } from "../../../actions/auth";
 import { useDispatch } from 'react-redux';
 import FileBase from 'react-file-base64';
-//import FormLabel from '@material-ui/core/FormLabel';
 import './stylesSingup.css';
 
 const initialState = {
@@ -27,21 +25,15 @@ const Register = () => {
     const [error, setError] = useState("")
 
     const navigate = useNavigate();
-   // const navigate = "";
 
     const handleChange = ({currentTarget: input}) => {
         setData({...data,[input.name]:input.value});
     };
 
-    console.log(data);
-
     const handleSubmit = async(e) => {
         e.preventDefault();
 
-        
         dispatch(signup(data, navigate));
-           
-        
     };
 
     return(
@@ -66,7 +58,6 @@ const Register = () => {
                             value={data.firstName}
                             required
                             className="input_register"
-
                         />
                          <input
                             type="text"
@@ -76,7 +67,6 @@ const Register = () => {
                             value={data.lastName}
                             required
                             className="input_register"
-
                         />
                         <input
                             type="text"
@@ -86,9 +76,7 @@ const Register = () => {
                             value={data.username}
                             required
                             className="input_register"
-
                         />
-                          
                            <input
                             type="email"
                             placeholder="Email"
@@ -97,7 +85,6 @@ const Register = () => {
                             value={data.email}
                             required
                             className="input_register"
-
                         />
                            <input
                             type="password"
@@ -107,7 +94,6 @@ const Register = () => {
                             value={data.password}
                             required
                             className="input_register"
-
                         />
                          <input
                             type="city"
@@ -117,7 +103,6 @@ const Register = () => {
                             value={data.city}
                             required
                             className="input_register"
-
                         />
                          <input
                             type="phoneNumber"
@@ -127,9 +112,7 @@ const Register = () => {
                             value={data.phoneNumber}
                             required
                             className="input_register"
-
-                        />
-                        
+                        />    
                         <label style={{color: 'white'}}>Choose photo</label>
                     <div className='container mr-60'>
              <FileBase type="file" multiple={false} onDone={({base64})=>setData({...data,profileImg:base64})}/>
@@ -141,7 +124,6 @@ const Register = () => {
                     </form>
                 </div>
             </div>
-
         </div>
     )
 };

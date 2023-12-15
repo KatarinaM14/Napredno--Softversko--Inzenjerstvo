@@ -15,8 +15,6 @@ const initialState = {
 
 const LogIn = () => {
     const [data, setData] = useState(initialState);
-
-
     const [error, setError] = useState("")
 
     const dispatch = useDispatch();
@@ -27,25 +25,18 @@ const LogIn = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        
-        console.log(data)
-        console.log(data.username, data.password)
         dispatch(signin(data, navigate));
-
     }
 
-    return(
-        
+    return( 
         <div className="login_container" style={{backgroundColor: 'white'}}>
             <div className="login_form_container">
              <div className="left">
                 <div style={{height: "5%"}}>
                     <h1 className="headerText" style={{color: "#7C567F"}}>Moments</h1>
-
                 </div>
                 <form className="form_container" onSubmit={handleSubmit}>
                         <div className="UsernamePasswordInputs">
-
                             <input
                                 type="username"
                                 placeholder="Username"
@@ -54,8 +45,6 @@ const LogIn = () => {
                                 value={data.email}
                                 required
                                 className="inputLogin"
-                            
-
                             />
                             <input
                                 type="password"
@@ -65,10 +54,8 @@ const LogIn = () => {
                                 value={data.password}
                                 required
                                 className="inputLogin"
-                            
                             />
                         </div>
-                      
                         <button type="submit" className="green_btn" style={{color: "#7C567F"}}>
                             Log in
                         </button>
@@ -84,7 +71,6 @@ const LogIn = () => {
                 </div>
             </div>
         </div>
-     
     );
 };
 

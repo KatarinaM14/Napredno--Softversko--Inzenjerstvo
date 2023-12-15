@@ -1,7 +1,6 @@
 import "./usermessage.css";
 import { Grid, Avatar, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-// import { getOneUser } from '../../../../actions/auth.js'
 import { useEffect } from "react";
 import { getUser } from "../../../../actions/auth";
 
@@ -12,10 +11,6 @@ export default function UserMessage({ mine, message, friend }) {
   const currentUser = JSON.parse(localStorage.getItem("profile")).user;
 
   const { isLoadnig, authData, user } = useSelector(state => state.auth); 
-  console.log(mine)
-  console.log(message)
-  console.log(friend)
-  console.log(currentUser)
 
   return (
     <Grid className={`userMessage ${(message?.sender?.id === currentUser?.id) ? "mineMessage" : "friendMessage"}`}>

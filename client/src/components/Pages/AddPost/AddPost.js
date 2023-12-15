@@ -34,7 +34,6 @@ const AddPost = () => {
         setNewPost({description: "", image: '', location: ''});
     }
 
-      
       const handleSubmit=async (e) =>{
         e.preventDefault();
         dispatch(createPost(newPost));
